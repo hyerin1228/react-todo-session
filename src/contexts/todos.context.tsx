@@ -3,13 +3,7 @@
 // 3. 범위 정해서 내려준다.
 
 import { createContext, useContext, useState } from "react";
-
-interface ToDo {
-  id: number;
-  title: string;
-  content: string;
-  isComplete: boolean;
-}
+import { ToDo } from "../types/toDo.type";
 
 type ToDosContextValueType = {
   toDos: ToDo[];

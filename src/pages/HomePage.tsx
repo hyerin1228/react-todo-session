@@ -1,5 +1,5 @@
 import { ChangeEventHandler, useState } from "react";
-import { Link } from "react-router-dom";
+import ToDoList from "../components/ToDoList";
 import { useToDos } from "../contexts/todos.context";
 
 function HomePage() {
@@ -30,24 +30,6 @@ function HomePage() {
     setContent(e.target.value);
   };
 
-  const handleClickDelete = (toDoId: number) => {
-    const newToDoList = toDos.filter((toDo) => {
-      return toDo.id !== toDoId;
-    });
-
-    setToDos(newToDoList);
-  };
-
-  const handleClickToggleIsComplete = (toDoId: number) => {
-    const targetToDo = toDos.find((toDo) => toDo.id === toDoId);
-    if (!targetToDo) return;
-
-    targetToDo.isComplete = !targetToDo.isComplete;
-    const newToDoList = [...toDos];
-
-    setToDos(newToDoList);
-  };
-
   return (
     <div>
       <h1>할 일 목록</h1>
@@ -62,26 +44,7 @@ function HomePage() {
       <button onClick={handleClickAdd}>추가하기</button>
 
       <hr />
-
-      <ul>
-        {toDos.map((toDo) => (
-          <li key={toDo.id}>
-            <Link to={`/todos/${toDo.id}`}>
-              <span
-                style={{
-                  textDecoration: toDo.isComplete ? "line-through" : "none",
-                }}
-              >
-                {toDo.title}
-              </span>
-              <button onClick={() => handleClickDelete(toDo.id)}>삭제</button>
-              <button onClick={() => handleClickToggleIsComplete(toDo.id)}>
-                {toDo.isComplete ? "완료 취소" : "완료"}
-              </button>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <ToDoList />
     </div>
   );
 }
