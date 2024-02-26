@@ -10,12 +10,21 @@ function ToDo({ toDo }: ToDoProps) {
   const { toDos, setToDos } = useToDos();
 
   const handleClickDelete = (toDoId: number) => {
+    setToDos((toDos) =>
+      toDos.filter((toDo) => {
+        return toDo.id !== toDoId;
+      })
+    );
+  };
+  /*
+  const handleClickDelete = (toDoId: number) => {
     const newToDoList = toDos.filter((toDo) => {
       return toDo.id !== toDoId;
     });
 
     setToDos(newToDoList);
   };
+  */
 
   const handleClickToggleIsComplete = (toDoId: number) => {
     const targetToDo = toDos.find((toDo) => toDo.id === toDoId);
